@@ -1,2 +1,0 @@
-# 允许必要的包执行安装脚本
-enable-pre-post-scripts=true
