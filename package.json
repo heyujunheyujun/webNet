@@ -19,12 +19,5 @@
     "@nuxt/eslint": "^1.15.2",
     "eslint": "^10.4.1",
     "typescript": "^6.0.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild",
-      "unrs-resolver"
-    ]
   }
 }
