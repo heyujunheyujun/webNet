@@ -1,2 +1,2 @@
 # webNet
-个人网站node项目
+CI/CD学习项目
