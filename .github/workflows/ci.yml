@@ -4,7 +4,7 @@ name: CI
 on:
   push:
     branches: [main]
-  pulll_request:
+  pull_request:
     branches: [main]
 
 # 取消同一分支上正在运行的工作流，只保留最新的
