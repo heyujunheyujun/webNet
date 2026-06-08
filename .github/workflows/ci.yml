@@ -38,9 +38,6 @@ jobs:
 
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
-        env:
-          PNPM_IGNORE_BUILD_SCRIPTS: "1"  # 忽略构建脚本的安全检查
-          CI: "false"                      # 关闭 CI 严格模式
 
       - name: ESLint 检查
         run: pnpm run lint
@@ -73,9 +70,6 @@ jobs:
 
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
-        env:
-          PNPM_IGNORE_BUILD_SCRIPTS: "1"  # 忽略构建脚本的安全检查
-          CI: "false"                      # 关闭 CI 严格模式
 
       - name: 生产环境构建
         run: pnpm build
