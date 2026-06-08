@@ -39,9 +39,6 @@ jobs:
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
 
-      - name: 批准构建脚本（非交互模式）
-        run: echo "y" | pnpm approve-builds
-
       - name: ESLint 检查
         run: pnpm run lint
 
@@ -73,9 +70,6 @@ jobs:
 
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
-
-      - name: 批准构建脚本（非交互模式）
-        run: echo "y" | pnpm approve-builds
 
       - name: 生产环境构建
         run: pnpm build
