@@ -1,0 +1,63 @@
+name: CI
+
+# 触发条件，每次push 或 PR 到 main 分支运行
+on:
+  push:
+    branches: [main]
+  pulll_request:
+    branches: [main]
+
+# 取消同一分支上正在运行的工作流，只保留最新的
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: ESLint 检查
+        run: npm run lint
+
+      - name: TypeScript 类型检查
+        run: npx vue-tsc --noEmit
+
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检查代码
+        uses: actions/checkout@v4
+      
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 生产环境构建
+        run: npm run build
+
+      - name: 验证 SSR 入口存在
+        run: |
+          if [ ! -f ".output/server/index.mjs" ]; then
+            echo "❌ SSR 入口文件不存在！"
+            exit 1
+          fi
+          echo "✅ SSR 构建验证通过"
