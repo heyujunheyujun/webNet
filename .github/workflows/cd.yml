@@ -33,5 +33,5 @@ jobs:
           file: ./Dockerfile
           target: production
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:latest
   
