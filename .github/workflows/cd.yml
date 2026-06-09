@@ -18,6 +18,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # 关键：配置 GitHub Runner 的 Docker daemon
+      - name: Configure Docker for insecure registry
+        run: |
+          sudo mkdir -p /etc/docker
+          echo '{
+            "insecure-registries": ["${{ env.REGISTRY }}"]
+          }' | sudo tee /etc/docker/daemon.json
+          sudo systemctl restart docker
+          # 等待 Docker 重启完成
+          sleep 5
+          docker info | grep -A 5 "Insecure Registries"
         
       - name: Convert repository name to lowercase
         run: |
